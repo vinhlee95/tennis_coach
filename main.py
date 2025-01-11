@@ -1,7 +1,7 @@
 import os
 import google.generativeai as genai
 from dotenv import load_dotenv
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from youtube_client import YouTubeAPI
 
 app = Flask(__name__)
@@ -21,12 +21,17 @@ model = genai.GenerativeModel(
 
 @app.route('/api/tutorials')
 def get_tutorials():
-    # Get input for YouTube search video
-    keywords = [
-        "Intermediate",
-        "Forehand",
-        "Eastern grip",
-    ]
+    # Get keywords from query parameters, defaulting to empty list if not provided
+    keywords_param = request.args.get('keywords', '')
+    keywords = [k.strip() for k in keywords_param.split(',')] if keywords_param else []
+
+    # Fallback to default keywords if none provided
+    if not keywords:
+        keywords = [
+            "Intermediate",
+            "Forehand",
+            "Eastern grip",
+        ]
 
     response = model.generate_content(  
         f"""
