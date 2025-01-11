@@ -1,0 +1,2 @@
+pydantic_ai==0.0.18
+python-dotenv==1.0.1
