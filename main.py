@@ -8,6 +8,6 @@ agent = Agent(
   system_prompt="You are a helpful assistant that can answer questions related to Tennis",
 )
 
-result = agent.run_sync("I want to improve my forehand. I have an Eastern grip. What should I do?")
+result = agent.run_sync("I want to improve my forehand. I have an Eastern grip. Give me links to 5 YouTube video to improve.")
 
 print(result)
